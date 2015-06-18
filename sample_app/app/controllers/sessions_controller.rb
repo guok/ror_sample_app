@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
 		user = User.find_by(email:params[:session][:email].downcase)
 		if user&& user.authenticate(params[:session][:password]) then
 			sign_in user
-			redirect_to user
+			redirect_back_or user
 		else
 			flash.now[:error] = "Wrong name or password"
 			self.current_session = SessionModel.new
